@@ -1,0 +1,13 @@
+name: Core
+version: '1.0-SNAPSHOT'
+main: tristan.core.Core
+api-version: '1.21'
+commands:
+  additem:
+    description: Add as many of as many items as you want to a player's inventory
+    aliases: ["ai"]
+  clearinventory:
+    description: Clear your inventory
+    aliases: ["clearinv", "cinv", "ci"]
+  menu:
+    description: Open the menu

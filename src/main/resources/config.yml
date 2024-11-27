@@ -1,0 +1,16 @@
+guis:
+  build:
+    title: "&aBuild Menu"
+    size: 9
+    contents:
+      0:
+        material: "CHERRY_WOOD"
+        name: "&dCherry Set"
+        lore:
+          - "Receive the cherry set, which contains:"
+          - "Cherry Planks"
+          - "Cherry Logs"
+          - "Cherry Slabs"
+          - "Cherry Stairs"
+        action:
+          command: "additem {player} cherry_planks 1"

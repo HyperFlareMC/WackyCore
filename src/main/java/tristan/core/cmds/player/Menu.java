@@ -29,13 +29,13 @@ public class Menu implements CommandExecutor{
             return true;
         }
         Player player = (Player) sender;
-        if(args.length == 0){
+        if(args.length != 1){
             player.sendMessage(Msgs.menuUsage);
             SoundsMgr.playFail(player);
             return true;
         }
         if(!guiMgr.isValidGui(args[0])){
-            player.sendMessage(invalidMenu);
+            player.sendMessage(Msgs.invalidMenu + args[0]);
             SoundsMgr.playFail(player);
             return true;
         }

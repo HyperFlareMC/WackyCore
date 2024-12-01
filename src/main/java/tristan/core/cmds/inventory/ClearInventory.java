@@ -7,20 +7,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tristan.core.Core;
+import tristan.core.utils.Msgs;
+import tristan.core.utils.sounds.SoundsMgr;
 
 public class ClearInventory implements CommandExecutor{
 
     private final Core core;
 
-    private String mustBePlayer = "You must be a player to use this command without a second argument for the target player!";
-    private String usage = "Usage: /clearinventory <all|hotbar|hand> <{self}|player>";
     private String[] usageArg1Options = {"all", "hand"};
-    private String emptyInv = "Your inventory is already empty!";
-    private String invCleared = "Your inventory has been cleared!";
-    private String handCleared = "Your hand has been cleared!";
-    private String invalidPlayer = "Your target player isn't on the server!";
-    private String invalidOption = "Your option isn't valid!";
-    private String success = "Success!";
 
     public ClearInventory(Core core){
         this.core = core;
@@ -32,35 +26,43 @@ public class ClearInventory implements CommandExecutor{
             case 1:
                 if(isValidOption(args[0])){
                     if(!(sender instanceof Player)){
-                        sender.sendMessage(mustBePlayer);
-                        sender.sendMessage(usage);
+                        sender.sendMessage(Msgs.mustBePlayer);
                         return true;
                     }
                     allHand((Player) sender, args[0]);
-                    sender.sendMessage(success);
+                    SoundsMgr.playSuccess((Player) sender);
                     return true;
                 }
-                sender.sendMessage(usage);
+                sender.sendMessage(Msgs.clearInventoryUsage);
                 return true;
             case 2:
                 if(isValidOption(args[0]) && isValidTarget(args[1])){
                     Player target = Bukkit.getPlayer(args[1]);
                     allHand((target), args[0]);
-                    sender.sendMessage(success);
-                    target.sendMessage(success);
+                    if(sender instanceof Player){
+                        SoundsMgr.playSuccess((Player) sender);
+                    }
+                    SoundsMgr.playSuccess(target);
                     return true;
                 }else if(isValidOption(args[0])){
-                    sender.sendMessage(invalidPlayer);
+                    if(sender instanceof Player){
+                        SoundsMgr.playFail((Player) sender);
+                    }
+                    sender.sendMessage(Msgs.invalidTarget + args[1]);
                     return true;
                 }else if(isValidTarget(args[1])){
-                    sender.sendMessage(invalidOption);
+                    if(sender instanceof Player){
+                        SoundsMgr.playFail((Player) sender);
+                    }
+                    sender.sendMessage(Msgs.invalidValue + args[0]);
                     return true;
                 }
-                sender.sendMessage(invalidPlayer);
-                sender.sendMessage(invalidOption);
+                sender.sendMessage(Msgs.clearInventoryUsage);
+                SoundsMgr.playFail((Player) sender);
                 return true;
             default:
-                sender.sendMessage(usage);
+                sender.sendMessage(Msgs.clearInventoryUsage);
+                SoundsMgr.playFail((Player) sender);
                 return true;
         }
     }
@@ -69,16 +71,12 @@ public class ClearInventory implements CommandExecutor{
         Inventory inv = player.getInventory();
         switch(arg.toLowerCase()){
             case "all":
-                if(inv.isEmpty()){
-                    player.sendMessage(emptyInv);
-                    return;
-                }
                 inv.clear();
-                player.sendMessage(invCleared);
+                SoundsMgr.playSuccess(player);
                 break;
             case "hand":
                 player.getInventory().setItemInMainHand(null);
-                player.sendMessage(handCleared);
+                SoundsMgr.playSuccess(player);
                 break;
         }
     }

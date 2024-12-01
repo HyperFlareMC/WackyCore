@@ -13,5 +13,5 @@ guis:
           - "Cherry Slabs"
           - "Cherry Stairs"
         commands:
-          - "additem {player} 1 CHERRY_PLANKS CHERRY_LOG CHERRY_SLAB CHERRY_STAIRS"
           - "ci all {player}"
+          - "additem {player} 1 CHERRY_PLANKS CHERRY_LOG CHERRY_SLAB CHERRY_STAIRS"

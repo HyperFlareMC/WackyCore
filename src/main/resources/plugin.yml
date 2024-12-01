@@ -1,5 +1,5 @@
 name: Core
-version: '1.1.0'
+version: '1.1.1'
 main: tristan.core.Core
 api-version: '1.21'
 commands:

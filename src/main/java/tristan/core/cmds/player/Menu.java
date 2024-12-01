@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tristan.core.Core;
 import tristan.core.gui.GuiMgr;
+import tristan.core.utils.Msgs;
+import tristan.core.utils.sounds.SoundsMgr;
 
 public class Menu implements CommandExecutor{
 
     private final Core core;
     public GuiMgr guiMgr;
 
-    private String usage = "Usage: /menu <name>";
-    private String mustBePlayer = "You must be a player to use this command!";
     private String invalidMenu = "Invalid menu";
 
     public Menu(Core core){
@@ -25,21 +25,18 @@ public class Menu implements CommandExecutor{
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
         if(!(sender instanceof Player)){
-            sender.sendMessage(mustBePlayer);
+            sender.sendMessage(Msgs.mustBePlayer);
             return true;
         }
         Player player = (Player) sender;
         if(args.length == 0){
-            player.sendMessage(usage);
+            player.sendMessage(Msgs.menuUsage);
+            SoundsMgr.playFail(player);
             return true;
         }
         if(!guiMgr.isValidGui(args[0])){
             player.sendMessage(invalidMenu);
-            for(String gui : guiMgr.getGuiList()){
-                for(int i = 0; i < guiMgr.getGuiLength(); i++){
-                    player.sendMessage(i + " : " + gui);
-                }
-            }
+            SoundsMgr.playFail(player);
             return true;
         }
         Inventory gui = guiMgr.createGui(args[0], (Player) sender);

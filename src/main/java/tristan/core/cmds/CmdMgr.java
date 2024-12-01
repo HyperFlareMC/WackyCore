@@ -20,7 +20,7 @@ public class CmdMgr{
         PluginCommand menu = core.getCommand("menu");
         menu.setExecutor(new Menu(core));
         PluginCommand addItem = core.getCommand("additem");
-        addItem.setExecutor(new AddItem(core));
+        addItem.setExecutor(new AddItem());
     }
 
 }

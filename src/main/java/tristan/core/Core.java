@@ -6,7 +6,6 @@ import tristan.core.events.EventMgr;
 
 public final class Core extends JavaPlugin{
 
-    private static Core instance;
     private final CmdMgr cmdMgr = new CmdMgr(this);
     private final EventMgr eventMgr = new EventMgr(this);
 
@@ -20,10 +19,6 @@ public final class Core extends JavaPlugin{
     @Override
     public void onDisable(){
         saveConfig();
-    }
-
-    public static Core getInstance(){
-        return instance;
     }
 
 }

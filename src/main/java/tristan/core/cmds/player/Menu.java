@@ -1,19 +1,12 @@
 package tristan.core.cmds.player;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import tristan.core.Core;
 import tristan.core.gui.GuiMgr;
-
-import java.util.List;
 
 public class Menu implements CommandExecutor{
 
@@ -22,7 +15,7 @@ public class Menu implements CommandExecutor{
 
     private String usage = "Usage: /menu <name>";
     private String mustBePlayer = "You must be a player to use this command!";
-    private String invalidMenu = "Invalid menu!";
+    private String invalidMenu = "Invalid menu";
 
     public Menu(Core core){
         this.core = core;
@@ -35,21 +28,23 @@ public class Menu implements CommandExecutor{
             sender.sendMessage(mustBePlayer);
             return true;
         }
+        Player player = (Player) sender;
         if(args.length == 0){
-            sender.sendMessage(usage);
+            player.sendMessage(usage);
             return true;
         }
-        if(!isValidGui(args[0])){
-            sender.sendMessage(invalidMenu);
+        if(!guiMgr.isValidGui(args[0])){
+            player.sendMessage(invalidMenu);
+            for(String gui : guiMgr.getGuiList()){
+                for(int i = 0; i < guiMgr.getGuiLength(); i++){
+                    player.sendMessage(i + " : " + gui);
+                }
+            }
             return true;
         }
-        Inventory inventory = guiMgr.createGui(args[0], (Player) sender);
-        ((Player) sender).openInventory(inventory);
+        Inventory gui = guiMgr.createGui(args[0], (Player) sender);
+        player.openInventory(gui);
         return true;
-    }
-
-    public boolean isValidGui(String arg){
-        return core.getConfig().contains("guis." + arg);
     }
 
 }

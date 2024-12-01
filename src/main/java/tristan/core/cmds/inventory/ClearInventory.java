@@ -28,41 +28,41 @@ public class ClearInventory implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        if(args.length == 0){
-            sender.sendMessage(usage);
-            return true;
-        }else if(args.length == 1){
-            if(isValidOption(args[0])){
-                if(!(sender instanceof Player)){
-                    sender.sendMessage(mustBePlayer);
-                    sender.sendMessage(usage);
+        switch(args.length){
+            case 1:
+                if(isValidOption(args[0])){
+                    if(!(sender instanceof Player)){
+                        sender.sendMessage(mustBePlayer);
+                        sender.sendMessage(usage);
+                        return true;
+                    }
+                    allHand((Player) sender, args[0]);
+                    sender.sendMessage(success);
                     return true;
                 }
-                allHand((Player) sender, args[0]);
-                sender.sendMessage(success);
+                sender.sendMessage(usage);
                 return true;
-            }
-            sender.sendMessage(usage);
-            return true;
-        }else if(args.length == 2){
-            if(isValidOption(args[0]) && isValidTarget(args[1])){
-                Player target = Bukkit.getPlayer(args[1]);
-                allHand((target), args[0]);
-                sender.sendMessage(success);
-                target.sendMessage(success);
-                return true;
-            }else if(isValidOption(args[0])){
+            case 2:
+                if(isValidOption(args[0]) && isValidTarget(args[1])){
+                    Player target = Bukkit.getPlayer(args[1]);
+                    allHand((target), args[0]);
+                    sender.sendMessage(success);
+                    target.sendMessage(success);
+                    return true;
+                }else if(isValidOption(args[0])){
+                    sender.sendMessage(invalidPlayer);
+                    return true;
+                }else if(isValidTarget(args[1])){
+                    sender.sendMessage(invalidOption);
+                    return true;
+                }
                 sender.sendMessage(invalidPlayer);
-                return true;
-            }else if(isValidTarget(args[1])){
                 sender.sendMessage(invalidOption);
                 return true;
-            }
-            sender.sendMessage(invalidPlayer);
-            sender.sendMessage(invalidOption);
-            return true;
+            default:
+                sender.sendMessage(usage);
+                return true;
         }
-        return true;
     }
 
     public void allHand(Player player, String arg){

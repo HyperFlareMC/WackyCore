@@ -5,7 +5,6 @@ import tristan.core.Core;
 import tristan.core.cmds.admin.AddItem;
 import tristan.core.cmds.inventory.ClearInventory;
 import tristan.core.cmds.player.Menu;
-import tristan.core.events.MenuListener;
 
 public class CmdMgr{
 
@@ -21,7 +20,7 @@ public class CmdMgr{
         PluginCommand menu = core.getCommand("menu");
         menu.setExecutor(new Menu(core));
         PluginCommand addItem = core.getCommand("additem");
-        addItem.setExecutor(new AddItem());
+        addItem.setExecutor(new AddItem(core));
     }
 
 }

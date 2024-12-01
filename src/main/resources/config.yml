@@ -1,10 +1,10 @@
 guis:
   build:
-    title: "&aBuild Menu"
+    title: "&aBuild"
     size: 9
     contents:
       0:
-        material: "CHERRY_WOOD"
+        material: "CHERRY_LOG"
         name: "&dCherry Set"
         lore:
           - "Receive the cherry set, which contains:"
@@ -12,5 +12,6 @@ guis:
           - "Cherry Logs"
           - "Cherry Slabs"
           - "Cherry Stairs"
-        action:
-          command: "additem {player} cherry_planks 1"
+        commands:
+          - "additem {player} 1 CHERRY_PLANKS CHERRY_LOG CHERRY_SLAB CHERRY_STAIRS"
+          - "ci all {player}"

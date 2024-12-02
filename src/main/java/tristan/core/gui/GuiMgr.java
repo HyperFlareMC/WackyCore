@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import tristan.core.Core;
+import tristan.core.config.ConfigMgr;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,21 +19,20 @@ public class GuiMgr{
 
     private final Core core;
     private final Logger logger;
-    private final FileConfiguration config;
+    private final ConfigMgr configMgr;
 
     public GuiMgr(Core core) {
         this.core = core;
         this.logger = core.getLogger();
-        this.config = core.getConfig();
+        this.configMgr = new ConfigMgr(core);
     }
 
     public Inventory createGui(String guiName, Player player){
-        FileConfiguration config = core.getConfig();
         String path = "guis." + guiName;
-        String title = ChatColor.translateAlternateColorCodes('&', config.getString(path + ".title", "Untitled"));
-        int size = validateSize(config.getInt(path + ".size", 9));
+        String title = ChatColor.translateAlternateColorCodes('&', configMgr.getGuiTitle(guiName));
+        int size = validateSize(configMgr.getGuiSize(guiName));
         Inventory gui = Bukkit.createInventory(player, size, title);
-        ConfigurationSection contents = config.getConfigurationSection(path + ".contents");
+        ConfigurationSection contents = configMgr.getGuiContents(guiName);
         if(contents == null){
             logger.warning("No contents configured for GUI: " + guiName);
             return gui;
@@ -92,18 +92,6 @@ public class GuiMgr{
         }
         item.setItemMeta(meta);
         return item;
-    }
-
-    public List<String> getGuiList(){
-        return config.getStringList("guis");
-    }
-
-    public int getGuiLength(){
-        return config.getStringList("guis").size();
-    }
-
-    public boolean isValidGui(String arg){
-        return core.getConfig().contains("guis." + arg);
     }
 
 }

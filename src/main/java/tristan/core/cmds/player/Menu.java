@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tristan.core.Core;
+import tristan.core.config.ConfigMgr;
 import tristan.core.gui.GuiMgr;
 import tristan.core.utils.Msgs;
 import tristan.core.utils.sounds.SoundsMgr;
@@ -14,12 +15,12 @@ public class Menu implements CommandExecutor{
 
     private final Core core;
     public GuiMgr guiMgr;
-
-    private String invalidMenu = "Invalid menu";
+    private final ConfigMgr configMgr;
 
     public Menu(Core core){
         this.core = core;
         this.guiMgr = new GuiMgr(core);
+        this.configMgr = new ConfigMgr(core);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class Menu implements CommandExecutor{
             SoundsMgr.playFail(player);
             return true;
         }
-        if(!guiMgr.isValidGui(args[0])){
+        if(!configMgr.isGui(args[0])){
             player.sendMessage(Msgs.invalidMenu + args[0]);
             SoundsMgr.playFail(player);
             return true;

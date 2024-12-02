@@ -15,3 +15,16 @@ guis:
         commands:
           - "ci all {player}"
           - "additem {player} 1 CHERRY_PLANKS CHERRY_LOG CHERRY_SLAB CHERRY_STAIRS"
+  tools:
+    title: "&bTools"
+    size: 27
+    contents:
+      0:
+        material: "DIAMOND_PICKAXE"
+        name: "&bTools Set"
+        lore:
+          - "Receive the tools set, which contains:"
+          - "Diamond Pickaxe"
+        commands:
+          - "ci all {player}"
+          - "additem {player} 1 DIAMOND_PICKAXE DIAMOND_AXE"

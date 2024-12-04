@@ -1,3 +1,33 @@
+# PLEASE READ
+# As of right now, you can not set certain permissions individually to a player,
+# they can only have the permission through the rank. Permissions for commands are as follows:
+# /clearinventory - mod.clearinv
+# /additem - mod.additem
+# /setrank - mod.setrank
+# IF YOU TRY TO CHANGE THAT OR USE SMT ELSE IT WON'T FUNCTION PROPERLY
+
+ranks:
+  default:
+    prefix: "&7[DEFAULT] "
+  admin:
+    prefix: "&b[ADMIN] "
+    permissions:
+      - "all"
+  moderator:
+    prefix: "&d[MODERATOR] "
+    permissions:
+      - "mod.clearinv"
+      - "mod.additem"
+      - "mod.setrank"
+
+
+
+# PLEASE READ
+# As of right now, the player has to have the permission/rank to execute whatever commands are put into the commands slot
+# ie if you put "additem {player} 1 STONE" and the player doesn't have the mod.additem permission, the command will not execute :D
+# GUI INVENTORY SIZE MUST BE A MULTIPLE OF 9 INCREASING TO 45 MAX
+# 9 18 27 36 45
+
 guis:
   build:
     title: "&aBuild"

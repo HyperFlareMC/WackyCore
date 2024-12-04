@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tristan.core.Core;
+import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
 import tristan.core.utils.sounds.SoundsMgr;
 
@@ -22,6 +23,13 @@ public class ClearInventory implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            if(!SessionManager.hasPermission(player, "mod.clearinv")){
+                player.sendMessage(Msgs.noPermission);
+                return true;
+            }
+        }
         switch(args.length){
             case 1:
                 if(isValidOption(args[0])){

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
 import tristan.core.utils.sounds.SoundsMgr;
 
@@ -16,6 +17,13 @@ public class AddItem implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            if(!SessionManager.hasPermission(player, "mod.additem")){
+                player.sendMessage(Msgs.noPermission);
+                return true;
+            }
+        }
         if(args.length < 3){
             sender.sendMessage(Msgs.addItemUsage);
             if(sender instanceof Player){

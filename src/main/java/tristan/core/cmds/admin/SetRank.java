@@ -22,7 +22,7 @@ public class SetRank implements CommandExecutor{
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
         if(sender instanceof Player){
             Player player = (Player) sender;
-            if(!SessionManager.hasPermission(player, "mod.setrank")){
+            if(!SessionManager.hasPermission(player, "setrank")){
                 player.sendMessage(Msgs.noPermission);
                 return true;
             }

@@ -1,14 +1,15 @@
 # PLEASE READ
 # As of right now, you can not set certain permissions individually to a player,
 # they can only have the permission through the rank. Permissions for commands are as follows:
-# /clearinventory - mod.clearinv
-# /additem - mod.additem
-# /setrank - mod.setrank
+# /clearinventory - clearinv
+# /additem - additem
+# /setrank - setrank
+# /ckick - ckick
 # IF YOU TRY TO CHANGE THAT OR USE SMT ELSE IT WON'T FUNCTION PROPERLY
 
 ranks:
   default:
-    prefix: "&7[DEFAULT] "
+    prefix: "&7[NORMIE] "
   admin:
     prefix: "&b[ADMIN] "
     permissions:
@@ -16,9 +17,10 @@ ranks:
   moderator:
     prefix: "&d[MODERATOR] "
     permissions:
-      - "mod.clearinv"
-      - "mod.additem"
-      - "mod.setrank"
+      - "clearinv"
+      - "additem"
+      - "setrank"
+      - "ckick"
 
 
 

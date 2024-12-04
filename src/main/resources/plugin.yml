@@ -1,7 +1,7 @@
 name: Core
-version: '1.3.0'
+version: '1.3.1'
 main: tristan.core.Core
-api-version: '1.21'
+api-version: '1.21.4'
 commands:
   additem:
     description: Add as many of as many items as you want to a player's inventory
@@ -15,3 +15,5 @@ commands:
   setrank:
     description: Set a player's rank
     aliases: ["sr"]
+  ckick:
+    description: Kick a player

@@ -25,7 +25,7 @@ public class ClearInventory implements CommandExecutor{
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(sender instanceof Player){
             Player player = (Player) sender;
-            if(!SessionManager.hasPermission(player, "mod.clearinv")){
+            if(!SessionManager.hasPermission(player, "clearinv")){
                 player.sendMessage(Msgs.noPermission);
                 return true;
             }

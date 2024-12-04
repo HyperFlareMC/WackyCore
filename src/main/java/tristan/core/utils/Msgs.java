@@ -16,6 +16,7 @@ public class Msgs{
     public static String clearInventoryUsage = "Usage: /clearinventory <all|hand> <{self}|player>";
     public static String menuUsage = "Usage: /menu <name>";
     public static String setRankUsage = "Usage: /setrank {player} {rank}";
+    public static String kickUsage = "Usage: /kick <player>";
 
     public static String playerFullInv = "The target player has a full inventory and has not received: ";
     public static String selfFullInv = "You have a full inventory and have not received: ";
@@ -23,5 +24,7 @@ public class Msgs{
     public static String positiveIntRequired = "A positive integer is required!";
 
     public static String mustBePlayer = "You must be a player to use this command!";
+
+    public static String getKicked = "You have been kicked!";
 
 }

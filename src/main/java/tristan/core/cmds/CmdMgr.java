@@ -3,6 +3,7 @@ package tristan.core.cmds;
 import org.bukkit.command.PluginCommand;
 import tristan.core.Core;
 import tristan.core.cmds.admin.AddItem;
+import tristan.core.cmds.admin.CKick;
 import tristan.core.cmds.admin.SetRank;
 import tristan.core.cmds.inventory.ClearInventory;
 import tristan.core.cmds.player.Menu;
@@ -24,6 +25,8 @@ public class CmdMgr{
         addItem.setExecutor(new AddItem());
         PluginCommand setRank = core.getCommand("setrank");
         setRank.setExecutor(new SetRank(core));
+        PluginCommand ckick = core.getCommand("ckick");
+        ckick.setExecutor(new CKick());
     }
 
 }

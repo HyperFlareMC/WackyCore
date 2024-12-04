@@ -7,3 +7,4 @@
 ### - Customizable player ranks
 
 ## THIS PLUGIN IS FAR FROM COMPLETE, USE IT AT YOUR OWN RISK FOR NOW
+## The goal of this plugin is simplicity!

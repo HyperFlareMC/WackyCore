@@ -1,5 +1,6 @@
 package tristan.core.config;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import tristan.core.Core;
 
@@ -37,26 +38,21 @@ public class ConfigMgr{
         return core.getConfig().getStringList("guis." + guiName + ".contents." + contentKey + ".commands");
     }
 
-    // methods to access specific parts of gui contents, not necessary as of rn
-    /*public Map<String, Object> getContent(String guiName, String contentKey){
-        return core.getConfig().getConfigurationSection("guis." + guiName + ".contents." + contentKey).getValues(false);
+    public Material getCompassMaterial(){
+        Material material = Material.matchMaterial(core.getConfig().getString("compass.material"));
+        return material;
     }
 
-    public int getContentLocation(String guiName){
-        return core.getConfig().getInt("guis." + guiName + ".contents.");
+    public String getCompassName(){
+        return core.getConfig().getString("compass.name");
     }
 
-    // CONTENT KEY IS SLOT IN INVENTORY
-    public String getContentMaterial(String guiName, String contentKey){
-        return core.getConfig().getString("guis." + guiName + ".contents." + contentKey + ".material", "AIR");
+    public int getCompassSlot(){
+        return core.getConfig().getInt("compass.slot");
     }
 
-    public String getContentName(String guiName, String contentKey){
-        return core.getConfig().getString("guis." + guiName + ".contents." + contentKey + ".name", "Untitled");
+    public List<String> getCompassCommands(){
+        return core.getConfig().getStringList("compass.commands");
     }
-
-    public List<String> getContentLore(String guiName, String contentKey) {
-        return core.getConfig().getStringList("guis." + guiName + ".contents." + contentKey + ".lore");
-    }*/
 
 }

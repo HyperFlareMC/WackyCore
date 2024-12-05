@@ -15,7 +15,7 @@ public class EventMgr{
     public void registerEvents(){
         core.getServer().getPluginManager().registerEvents(new DisableDefCmds(), core);
         core.getServer().getPluginManager().registerEvents(new MenuListener(core), core);
-        core.getServer().getPluginManager().registerEvents(new SessionListener(), core);
+        core.getServer().getPluginManager().registerEvents(new SessionListener(core), core);
         core.getServer().getPluginManager().registerEvents(new ChatListener(), core);
     }
 

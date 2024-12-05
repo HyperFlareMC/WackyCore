@@ -1,24 +1,30 @@
 package tristan.core.cmds.inventory;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import tristan.core.Core;
+import tristan.core.config.ConfigMgr;
 import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
-import tristan.core.utils.sounds.SoundsMgr;
 
 public class ClearInventory implements CommandExecutor{
 
     private final Core core;
+    private final ConfigMgr configMgr;
 
     private String[] usageArg1Options = {"all", "hand"};
 
     public ClearInventory(Core core){
         this.core = core;
+        this.configMgr = new ConfigMgr(core);
     }
 
     @Override
@@ -38,7 +44,6 @@ public class ClearInventory implements CommandExecutor{
                         return true;
                     }
                     allHand((Player) sender, args[0]);
-                    SoundsMgr.playSuccess((Player) sender);
                     return true;
                 }
                 sender.sendMessage(Msgs.clearInventoryUsage);
@@ -47,30 +52,18 @@ public class ClearInventory implements CommandExecutor{
                 if(isValidOption(args[0]) && isValidTarget(args[1])){
                     Player target = Bukkit.getPlayer(args[1]);
                     allHand((target), args[0]);
-                    if(sender instanceof Player){
-                        SoundsMgr.playSuccess((Player) sender);
-                    }
-                    SoundsMgr.playSuccess(target);
                     return true;
                 }else if(isValidOption(args[0])){
-                    if(sender instanceof Player){
-                        SoundsMgr.playFail((Player) sender);
-                    }
                     sender.sendMessage(Msgs.invalidTarget + args[1]);
                     return true;
                 }else if(isValidTarget(args[1])){
-                    if(sender instanceof Player){
-                        SoundsMgr.playFail((Player) sender);
-                    }
                     sender.sendMessage(Msgs.invalidValue + args[0]);
                     return true;
                 }
                 sender.sendMessage(Msgs.clearInventoryUsage);
-                SoundsMgr.playFail((Player) sender);
                 return true;
             default:
                 sender.sendMessage(Msgs.clearInventoryUsage);
-                SoundsMgr.playFail((Player) sender);
                 return true;
         }
     }
@@ -80,11 +73,23 @@ public class ClearInventory implements CommandExecutor{
         switch(arg.toLowerCase()){
             case "all":
                 inv.clear();
-                SoundsMgr.playSuccess(player);
+                Material material = configMgr.getCompassMaterial();
+                if(material == null){
+                    return;
+                }
+                String name = ChatColor.translateAlternateColorCodes('&', configMgr.getCompassName());
+                int slot = configMgr.getCompassSlot();
+                if(slot < 0 || slot > 8){
+                    return;
+                }
+                ItemStack itemStack = new ItemStack(material);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName(name);
+                itemStack.setItemMeta(itemMeta);
+                inv.setItem(slot, itemStack);
                 break;
             case "hand":
                 player.getInventory().setItemInMainHand(null);
-                SoundsMgr.playSuccess(player);
                 break;
         }
     }

@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
-import tristan.core.utils.sounds.SoundsMgr;
 
 import java.util.HashMap;
 
@@ -26,15 +25,11 @@ public class AddItem implements CommandExecutor{
         }
         if(args.length < 3){
             sender.sendMessage(Msgs.addItemUsage);
-            if(sender instanceof Player){
-                SoundsMgr.playFail((Player) sender);
-            }
             return true;
         }
         Player targetPlayer = Bukkit.getPlayer(args[0]);
         if(targetPlayer == null){
             sender.sendMessage(Msgs.invalidTarget + args[0]);
-            SoundsMgr.playFail((Player) sender);
             return true;
         }
         int amount;
@@ -43,7 +38,6 @@ public class AddItem implements CommandExecutor{
             if(amount <= 0) throw new NumberFormatException();
         }catch(NumberFormatException e){
             sender.sendMessage(Msgs.positiveIntRequired);
-            SoundsMgr.playFail((Player) sender);
             return true;
         }
         for(int i = 2; i < args.length; i++){
@@ -64,8 +58,6 @@ public class AddItem implements CommandExecutor{
                 sender.sendMessage(Msgs.playerFullInv + material.name());
             }
         }
-        SoundsMgr.playSuccess(targetPlayer);
-        SoundsMgr.playSuccess((Player) sender);
         return true;
     }
 

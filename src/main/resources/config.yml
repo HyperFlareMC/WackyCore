@@ -5,6 +5,7 @@
 # /additem - additem
 # /setrank - setrank
 # /ckick - ckick
+# /cgamemode - cgamemode
 # IF YOU TRY TO CHANGE THAT OR USE SMT ELSE IT WON'T FUNCTION PROPERLY
 
 ranks:
@@ -21,6 +22,7 @@ ranks:
       - "additem"
       - "setrank"
       - "ckick"
+      - "cgamemode"
 
 
 
@@ -60,3 +62,21 @@ guis:
         commands:
           - "ci all {player}"
           - "additem {player} 1 DIAMOND_PICKAXE DIAMOND_AXE"
+  options:
+    title: "&4Options"
+    size: 9
+    contents:
+      0:
+        material: "STONE"
+        name: "Open Build Menu"
+        lore:
+          - "whatever lore"
+        commands:
+          - "menu build"
+
+compass:
+  material: "NETHER_STAR"
+  name: "&2Options"
+  slot: 8
+  commands:
+    - "menu options"

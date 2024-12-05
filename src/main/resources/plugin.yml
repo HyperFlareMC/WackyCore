@@ -1,5 +1,5 @@
 name: Core
-version: '1.3.1'
+version: '1.3.2'
 main: tristan.core.Core
 api-version: '1.21.4'
 commands:
@@ -17,3 +17,5 @@ commands:
     aliases: ["sr"]
   ckick:
     description: Kick a player
+  cgamemode:
+    description: Set your or another players' gamemode

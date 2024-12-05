@@ -9,7 +9,6 @@ import tristan.core.Core;
 import tristan.core.config.ConfigMgr;
 import tristan.core.gui.GuiMgr;
 import tristan.core.utils.Msgs;
-import tristan.core.utils.sounds.SoundsMgr;
 
 public class Menu implements CommandExecutor{
 
@@ -32,12 +31,10 @@ public class Menu implements CommandExecutor{
         Player player = (Player) sender;
         if(args.length != 1){
             player.sendMessage(Msgs.menuUsage);
-            SoundsMgr.playFail(player);
             return true;
         }
         if(!configMgr.isGui(args[0])){
             player.sendMessage(Msgs.invalidMenu + args[0]);
-            SoundsMgr.playFail(player);
             return true;
         }
         Inventory gui = guiMgr.createGui(args[0], (Player) sender);

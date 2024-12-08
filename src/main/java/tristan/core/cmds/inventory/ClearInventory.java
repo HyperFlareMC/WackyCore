@@ -44,6 +44,7 @@ public class ClearInventory implements CommandExecutor{
                         return true;
                     }
                     allHand((Player) sender, args[0]);
+                    sender.sendMessage(Msgs.clearInvSuccess + args[0]);
                     return true;
                 }
                 sender.sendMessage(Msgs.clearInventoryUsage);
@@ -52,6 +53,11 @@ public class ClearInventory implements CommandExecutor{
                 if(isValidOption(args[0]) && isValidTarget(args[1])){
                     Player target = Bukkit.getPlayer(args[1]);
                     allHand((target), args[0]);
+                    if(target == sender){
+                        sender.sendMessage(Msgs.clearInvSuccess + args[0]);
+                        return true;
+                    }
+                    sender.sendMessage(Msgs.clearInvSuccessOther + args[0]);
                     return true;
                 }else if(isValidOption(args[0])){
                     sender.sendMessage(Msgs.invalidTarget + args[1]);

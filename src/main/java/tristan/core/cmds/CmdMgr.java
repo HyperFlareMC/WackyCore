@@ -2,10 +2,7 @@ package tristan.core.cmds;
 
 import org.bukkit.command.PluginCommand;
 import tristan.core.Core;
-import tristan.core.cmds.admin.AddItem;
-import tristan.core.cmds.admin.CGamemode;
-import tristan.core.cmds.admin.CKick;
-import tristan.core.cmds.admin.SetRank;
+import tristan.core.cmds.admin.*;
 import tristan.core.cmds.inventory.ClearInventory;
 import tristan.core.cmds.player.Menu;
 
@@ -30,6 +27,8 @@ public class CmdMgr{
         ckick.setExecutor(new CKick());
         PluginCommand cgamemode = core.getCommand("cgamemode");
         cgamemode.setExecutor(new CGamemode());
+        PluginCommand modspec = core.getCommand("modspec");
+        modspec.setExecutor(new ModSpec());
     }
 
 }

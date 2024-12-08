@@ -6,6 +6,8 @@
 # /setrank - setrank
 # /ckick - ckick
 # /cgamemode - cgamemode
+# /menu - menu
+# /modspec - modspec
 # IF YOU TRY TO CHANGE THAT OR USE SMT ELSE IT WON'T FUNCTION PROPERLY
 
 ranks:
@@ -23,6 +25,8 @@ ranks:
       - "setrank"
       - "ckick"
       - "cgamemode"
+      - "menu"
+      - "modspec"
 
 
 

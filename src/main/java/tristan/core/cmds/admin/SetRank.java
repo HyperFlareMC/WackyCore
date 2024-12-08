@@ -44,6 +44,8 @@ public class SetRank implements CommandExecutor{
         SessionManager.setRank(target, rank);
         core.reloadConfig();
         RankUtil.loadRanksFromConfig(core);
+        target.sendMessage(Msgs.rankUpdateSuccess);
+        sender.sendMessage(Msgs.rankUpdateSuccess);
         return true;
     }
 

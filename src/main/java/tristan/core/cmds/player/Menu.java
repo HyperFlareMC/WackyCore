@@ -8,16 +8,15 @@ import org.bukkit.inventory.Inventory;
 import tristan.core.Core;
 import tristan.core.config.ConfigMgr;
 import tristan.core.gui.GuiMgr;
+import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
 
 public class Menu implements CommandExecutor{
 
-    private final Core core;
     public GuiMgr guiMgr;
     private final ConfigMgr configMgr;
 
     public Menu(Core core){
-        this.core = core;
         this.guiMgr = new GuiMgr(core);
         this.configMgr = new ConfigMgr(core);
     }
@@ -29,6 +28,10 @@ public class Menu implements CommandExecutor{
             return true;
         }
         Player player = (Player) sender;
+        if(!SessionManager.hasPermission(player, "menu")){
+            player.sendMessage(Msgs.noPermission);
+            return true;
+        }
         if(args.length != 1){
             player.sendMessage(Msgs.menuUsage);
             return true;

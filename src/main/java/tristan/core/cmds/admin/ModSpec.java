@@ -21,13 +21,7 @@ public class ModSpec implements CommandExecutor{
                 player.sendMessage(Msgs.modspecUsage);
                 return true;
             }
-            if(isModMode(player)){
-                player.setInvisible(false);
-                player.sendMessage(Msgs.exitModMode);
-                return true;
-            }
-            player.setInvisible(true);
-            player.sendMessage(Msgs.enterModMode);
+            setModMode(player);
             return true;
 
         }
@@ -37,6 +31,15 @@ public class ModSpec implements CommandExecutor{
 
     public boolean isModMode(Player player){
         return player.isInvisible();
+    }
+
+    public void setModMode(Player player){
+        if(isModMode(player)){
+            player.setInvisible(false);
+            player.sendMessage(Msgs.exitModMode);
+        }
+        player.setInvisible(true);
+        player.sendMessage(Msgs.enterModMode);
     }
 
 }

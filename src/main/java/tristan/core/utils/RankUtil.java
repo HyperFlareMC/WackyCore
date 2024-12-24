@@ -25,7 +25,9 @@ public class RankUtil{
     }
 
     public static String getPrefix(String rank){
-        return rankPrefixes.getOrDefault(rank, ChatColor.GRAY + "[DEFAULT]");
+        return rankPrefixes.getOrDefault(rank,
+                    Core.getInstance().getConfig().getString("ranks.default.prefix")
+                );
     }
 
     public static List<String> getPermissions(String rank){

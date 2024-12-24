@@ -8,12 +8,15 @@ import tristan.core.utils.RankUtil;
 
 public final class Core extends JavaPlugin{
 
+    public static Core instance;
+
     private final CmdMgr cmdMgr = new CmdMgr(this);
     private final EventMgr eventMgr = new EventMgr(this);
     private SessionManager sessionMgr = new SessionManager(this);
 
     @Override
     public void onEnable(){
+        instance = this;
         saveDefaultConfig();
         cmdMgr.registerCmds();
         eventMgr.registerEvents();
@@ -27,8 +30,8 @@ public final class Core extends JavaPlugin{
         saveConfig();
     }
 
-    public SessionManager getSessionManager(){
-        return sessionMgr;
+    public static Core getInstance(){
+        return instance;
     }
 
 }

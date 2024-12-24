@@ -9,8 +9,6 @@ import tristan.core.utils.Msgs;
 
 public class ModSpec implements CommandExecutor{
 
-    private boolean modMode = false;
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
         if(sender instanceof Player){
@@ -38,11 +36,7 @@ public class ModSpec implements CommandExecutor{
     }
 
     public boolean isModMode(Player player){
-        if(player.isInvisible()){
-            this.modMode = true;
-        }
-        this.modMode = false;
-        return this.modMode;
+        return player.isInvisible();
     }
 
 }

@@ -1,9 +1,18 @@
 package tristan.core.cmds.admin;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+import tristan.core.Core;
 import tristan.core.session.SessionManager;
 import tristan.core.utils.Msgs;
 
@@ -39,6 +48,19 @@ public class ModSpec implements CommandExecutor{
             player.sendMessage(Msgs.exitModMode);
         }
         player.setInvisible(true);
+        ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+        Core core = Core.getInstance();
+        manager.addPacketListener(new PacketAdapter(core, PacketType.Play.Server.ENTITY_EQUIPMENT){
+            @Override
+            public void onPacketSending(PacketEvent event){
+                if(event.getPacketType() == PacketType.Play.Server.ENTITY_EQUIPMENT){
+                    int entityId = event.getPacket().getIntegers().read(0);
+                    if(entityId == event.getPlayer().getEntityId()){
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        });
         player.sendMessage(Msgs.enterModMode);
     }
 
